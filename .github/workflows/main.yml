@@ -1,0 +1,40 @@
+name: NuGet-publish
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'NugetSample.HiIshii/NugetSample.HiIshii/NugetSample.HiIshii.csproj'
+
+  workflow_dispatch:
+
+# slnファイルがルートに無い場合はルートディレクトリを変更する。
+defaults:
+  run:
+    working-directory: ClassLibrary1
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      packages: write
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Set up .NET Core
+        uses: actions/setup-dotnet@v4
+
+      - name: Build with dotnet
+        run: dotnet build --configuration Release
+
+      - name: Pack NuGet Package
+        run: dotnet pack NugetSample.HiIshii/NugetSample.HiIshii/NugetSample.HiIshii.csproj -c Release -o ./dist
+
+      - name: Publish NuGet
+        run: dotnet nuget push dist/*.nupkg --source "Github Packages" --api-key ${{secrets.GITHUB_TOKEN}} --skip-duplicate
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
