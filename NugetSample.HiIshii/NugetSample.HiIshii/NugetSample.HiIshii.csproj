@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <SignAssembly>True</SignAssembly>
+    <AssemblyOriginatorKeyFile>C:\Ks\C\Actionsサンプル\NugetSample.HiIshii\NugetSample.HiIshii.snk</AssemblyOriginatorKeyFile>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <Title>サンプルタイトル</Title>
+    <Authors>石井秀実</Authors>
+    <Company>KENTEM</Company>
+    <Description>せつめい</Description>
+  </PropertyGroup>
+
+</Project>
