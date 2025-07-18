@@ -9,14 +9,10 @@ on:
 
   workflow_dispatch:
 
-  defaults:
-    run:
-      working-directory: NugetSample.HiIshii
-
 # slnファイルがルートに無い場合はルートディレクトリを変更する。
 defaults:
   run:
-    working-directory: ClassLibrary1
+    working-directory: NugetSample.HiIshii
 
 jobs:
   build:
