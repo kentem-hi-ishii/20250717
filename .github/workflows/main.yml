@@ -9,6 +9,10 @@ on:
 
   workflow_dispatch:
 
+  defaults:
+    run:
+      working-directory: NugetSample.HiIshii
+
 # slnファイルがルートに無い場合はルートディレクトリを変更する。
 defaults:
   run:
@@ -29,10 +33,10 @@ jobs:
         uses: actions/setup-dotnet@v4
 
       - name: Build with dotnet
-        run: dotnet build --configuration Release
+        run: dotnet build NugetSample.HiIshii/NugetSample.HiIshii.csproj  --configuration Release
 
       - name: Pack NuGet Package
-        run: dotnet pack NugetSample.HiIshii/NugetSample.HiIshii/NugetSample.HiIshii.csproj -c Release -o ./dist
+        run: dotnet pack NugetSample.HiIshii/NugetSample.HiIshii.csproj -c Release -o ./dist
 
       - name: Publish NuGet
         run: dotnet nuget push dist/*.nupkg --source "Github Packages" --api-key ${{secrets.GITHUB_TOKEN}} --skip-duplicate
